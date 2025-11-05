@@ -57,7 +57,7 @@ body {
     background-color: #f29729; 
 }
 
-/* REGRAS DO TÍTULO (MANTIDAS) */
+/* REGRAS DO TÍTULO */
 .item .title {
     font-family: 'Roboto', sans-serif; 
     font-size: 500px; 
@@ -79,10 +79,12 @@ body {
 .item .fruit { 
     position: absolute;
     width: 100%;
+    /* CORREÇÃO: Adicionado height: 100% para forçar renderização correta */
+    height: 100%; 
     top: 0;
     left: 0;
     z-index: 3; 
-    max-height: 100vh;
+    /* max-height: 100vh não é mais necessário com height: 100% */
     object-fit: cover;
 }
 
@@ -127,4 +129,27 @@ body {
 
 #nextBtn {
     right: 10px;
+}
+
+/* ================================================= */
+/* 📱 FUNÇÃO PARA RESPONSIVIDADE (TELAS DE CELULAR) */
+/* ================================================= */
+
+@media (max-width: 768px) {
+    /* 1. Ajusta o tamanho do texto (Título) em telas pequenas */
+    .item .title {
+        font-size: 150px; /* Reduz o tamanho do texto do fundo */
+    }
+
+    /* 2. Ajusta o tamanho da lata de refrigerante */
+    .item .refri {
+        width: 60%; /* Aumenta a lata para ocupar mais espaço na largura */
+        max-height: 60vh; /* Diminui o máximo de altura para não esbarrar */
+    }
+
+    /* 3. Ajusta o tamanho dos botões de navegação */
+    .arrow button {
+        font-size: 2rem;
+        padding: 5px 15px;
+    }
 }
