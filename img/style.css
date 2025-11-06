@@ -1,0 +1,155 @@
+/* REGRAS BÁSICAS */
+body {
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+}
+
+/* REGRAS DO ITEM (CONTAINER PRINCIPAL) */
+.item {
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    /* 🌟 ANIMAÇÃO: Item escondido ABAIXO da tela */
+    transform: translateY(100%); 
+    
+    /* Tempo de animação */
+    transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+    opacity: 0;
+    pointer-events: none; 
+    
+    display: flex;
+}
+
+/* EXIBE O ITEM ATUAL (Desliza para cima) */
+.item.active {
+    opacity: 1; 
+    transform: translateY(0); /* Posição final na tela */
+    pointer-events: auto; 
+}
+
+/* 🌟 NOVO: Animação para o item que está SAINDO (opcional) */
+.item.is-leaving {
+    opacity: 0;
+    /* Faz o item antigo deslizar para baixo ao sair */
+    transform: translateY(-100%); 
+}
+
+/* REGRAS DE COR DE FUNDO */
+.morango-bg {
+    background-color: #e4424c; 
+}
+
+.abacate-bg {
+    background-color: #6aab32; 
+}
+
+.laranja-bg {
+    background-color: #f29729; 
+}
+
+/* REGRAS DO TÍTULO */
+.item .title {
+    font-family: 'Roboto', sans-serif; 
+    font-size: 500px; 
+    color: #fff;
+    text-align: center; 
+    
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    
+    z-index: 4; 
+    white-space: nowrap;
+    
+    opacity: 0.3; 
+}
+
+/* REGRAS DA IMAGEM DE FRUTA/BLUR */
+.item .fruit { 
+    position: absolute;
+    width: 100%;
+    /* CORREÇÃO: Adicionado height: 100% para forçar renderização correta */
+    height: 100%; 
+    top: 0;
+    left: 0;
+    z-index: 3; 
+    /* max-height: 100vh não é mais necessário com height: 100% */
+    object-fit: cover;
+}
+
+/* REGRAS DA IMAGEM DO REFRIGERANTE (LATA) */
+.item .refri {
+    position: absolute; 
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%); 
+    
+    z-index: 5; 
+    
+    width: 40%;
+    max-height: 80vh;
+    height: auto;
+}
+
+/* REGRAS DOS BOTÕES DE NAVEGAÇÃO (MANTIDAS) */
+.arrow button {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 100;
+    background: rgba(0, 0, 0, 0.4);
+    color: white;
+    font-size: 3rem;
+    border: none;
+    cursor: pointer;
+    padding: 10px 20px;
+    user-select: none;
+    opacity: 0.8;
+    transition: opacity 0.2s;
+}
+
+.arrow button:hover {
+    opacity: 1;
+}
+
+#prevBtn {
+    left: 10px;
+}
+
+#nextBtn {
+    right: 10px;
+}
+
+/* ================================================= */
+/* 📱 FUNÇÃO PARA RESPONSIVIDADE (TELAS DE CELULAR) */
+/* ================================================= */
+
+@media (max-width: 768px) {
+    /* 1. Ajusta o tamanho do texto (Título) em telas pequenas */
+    .item .title {
+        font-size: 150px; /* Reduz o tamanho do texto do fundo */
+    }
+
+    /* 2. Ajusta o tamanho da lata de refrigerante */
+    .item .refri {
+        width: 60%; /* Aumenta a lata para ocupar mais espaço na largura */
+        max-height: 60vh; /* Diminui o máximo de altura para não esbarrar */
+    }
+
+    /* 3. Ajusta o tamanho dos botões de navegação */
+    .arrow button {
+        font-size: 2rem;
+        padding: 5px 15px;
+    }
+}
